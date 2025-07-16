@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bénévoles du centre</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e9ecef;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #d93025;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      flex-shrink: 0;
+    }
+
+    main {
+      padding: 1rem;
+      flex-grow: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      background-color: #f8f9fa;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 180px; /* un peu plus étroit */
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      max-height: 280px; /* hauteur max réduite */
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 120px; /* hauteur image réduite */
+      object-fit: cover;
+      border-bottom: 2px solid #d93025;
+      flex-shrink: 0;
+    }
+
+    .card-body {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #212529;
+      margin-bottom: 0.3rem;
+    }
+
+    .domain {
+      font-size: 0.9rem;
+      color: #555;
+      font-style: italic;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>Les bénévoles du centre</header>
+  <main>
+    <div class="card">
+<img src="assets/images/homepage/benev/belgacem.jpg" alt="Belgacem" />
+      <div class="card-body">
+        <div class="name"> Belgacem Bouali</div>
+        <div class="domain">Animation d’ateliers éducatifs</div>
+      </div>
+    </div>
+    <div class="card">
+<img src="assets/images/homepage/benev/chokri.jpg" alt="chokri" />
+      <div class="card-body">
+        <div class="name">chokri Lajnef</div>
+        <div class="domain">Organisation d’événements culturels</div>
+      </div>
+    </div>
+    <div class="card">
+<img src="assets/images/homepage/benev/eya.jpg" alt="Eya Azaiez" />
+      <div class="card-body">
+        <div class="name">Eya Azaiez</div>
+        <div class="domain">Production de contenus (vidéo, photo, articles)
+</div>
+      </div>
+    </div>
+    <div class="card">
+<img src="assets/images/homepage/benev/farah.jpg" alt="farah" />
+      <div class="card-body">
+        <div class="name"> Farah Slimi </div>
+        <div class="domain"> Gestion de l’accueil des visiteurs</div>
+      </div>
+    </div>
+    <div class="card">
+<img src="assets/images/homepage/benev/khairi.jpg" alt="khairi" />
+      <div class="card-body">
+        <div class="name">Khaireddine Haba</div>
+        <div class="domain">Organisation d’événements culturels</div>
+      </div>
+    </div>
+      <div class="card">
+<img src="assets/images/homepage/benev/yasmin.jpg" alt="khairi" />
+      <div class="card-body">
+        <div class="name">Yasmin Lajnef</div>
+        <div class="domain">Accueil et réception
+
+</div>
+      </div>
+    </div>  <div class="card">
+<img src="assets/images/homepage/benev/mazn.jpg" alt="mazen" />
+      <div class="card-body">
+        <div class="name"> Mazen Bouali</div>
+        <div class="domain">Gestion de projet
+
+</div>
+      </div>
+    </div>  <div class="card">
+<img src="assets/images/homepage/benev/oumaima.jpg" alt="oumaima" />
+      <div class="card-body">
+        <div class="name">Oumeima Romdhan </div>
+        <div class="domain">Accueil et organisation
+</div>
+      </div>
+    </div>  <div class="card">
+<img src="assets/images/homepage/benev/sabri.jpg" alt="sabri" />
+      <div class="card-body">
+        <div class="name">Sabri chaabouni</div>
+        <div class="domain">Support technique
+
+</div>
+      </div>
+    </div>  <div class="card">
+<img src="assets/images/homepage/benev/walid.jpg" alt="walid" />
+      <div class="card-body">
+        <div class="name">Walid Riahie </div>
+        <div class="domain">Organisation d’événements culturels</div>
+      </div>
+    </div>  <div class="card">
+<img src="assets/images/homepage/benev/wiem.jpg" alt="wiem" />
+      <div class="card-body">
+        <div class="name">  Wiem Ghares</div>
+        <div class="domain">Support informatique
+
+</div>
+      </div>
+    </div>  <div class="card">
+<img src="assets/images/homepage/benev/zouhour.jpg" alt="zouhour" />
+      <div class="card-body">
+        <div class="name"> Zouhour Lajnef </div>
+        <div class="domain"> Accueil et réception
+
+</div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

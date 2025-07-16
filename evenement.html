@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Événements - Centre Le Masque</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background-color: #f2f3f5;
+    }
+    header {
+      background: linear-gradient(135deg, #b71c1c, #880e4f);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+      font-size: 1.1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    @media (max-width: 1100px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+      }
+    }
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+      }
+    }
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.4rem;
+      color: #b71c1c;
+      position: relative;
+    }
+    .card h3::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: #b71c1c;
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+    .card small {
+      display: block;
+      margin-top: 0.5rem;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    .card button {
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(135deg, #b71c1c, #880e4f);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.3s ease;
+    }
+    .card button:hover {
+      background: linear-gradient(135deg, #d32f2f, #ad1457);
+    }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      padding: 3rem 1rem;
+      overflow-y: auto;
+    }
+    .modal-content {
+      background: white;
+      margin: auto;
+      padding: 1rem 2rem;
+      width: 80vw;
+      max-height: 80vh;
+      overflow-y: auto;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .modal-content img {
+      flex: 0 0 auto;
+      width: 320px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .close {
+      position: fixed;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    .country-section {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+    }
+    .country-section h4 {
+      color: #880e4f;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .country-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .country-gallery img {
+      width: 180px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .country-gallery img:hover {
+      transform: scale(1.05);
+    }
+    .modal-content video {
+      width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .years-container {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+      overflow: hidden;
+    }
+    .year-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #880e4f;
+      border-radius: 8px;
+      background: #fafafa;
+      padding: 0.5rem;
+      overflow-y: auto;
+    }
+    .year-column h4 {
+      color: #880e4f;
+      font-size: 1.3rem;
+      text-align: center;
+      margin: 0 0 0.5rem 0;
+      flex-shrink: 0;
+    }
+    .year-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      overflow-y: auto;
+    }
+    .year-gallery img {
+      width: 100px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Événements du Centre Culturel Le Masque</h1>
+</header>
+
+<div class="container">
+  <div class="intro">
+    <p>
+      Au cœur de notre passion artistique, le Centre Culturel <strong>Le Masque</strong> vous invite à découvrir la richesse
+      et la diversité de ses festivals emblématiques. Depuis des années, nous célébrons la créativité, le théâtre, la
+      musique et les arts visuels à travers des événements uniques qui rassemblent artistes, passionnés et curieux.
+    </p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>تظاهرة الفتي الريفي المبدع</h3>
+      <small>Depuis 2019</small>
+      <button onclick="openModal(1)">Voir photos</button>
+    </div>
+    <div class="card">
+      <h3>مهرجان القناع المسرحي </h3>
+      <small>Depuis 2022</small>
+      <button onclick="openModal(2)">Voir photos</button>
+    </div>
+    <div class="card">
+      <h3>افريقيا المبدعة</h3>
+      <small>Depuis 2019</small>
+      <button onclick="openModal(3)">Voir photos</button>
+    </div>
+    <div class="card">
+      <h3>ساعة فن 48</h3>
+      <small>Depuis 2017</small>
+      <button onclick="openModal(4)">Voir photos</button>
+    </div>
+    <div class="card">
+      <h3>أنا فنان</h3>
+      <small>Depuis 2019</small>
+      <button onclick="openModal(5)">Voir photos</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <span class="close" onclick="closeModal()" aria-label="Fermer la fenêtre modale">&times;</span>
+  <div class="modal-content" id="modal-content">
+    <!-- images ou vidéo insérées ici -->
+  </div>
+</div>
+
+<script>
+  const images = {
+    1: Array.from({length: 114}, (_, i) => `assets/images/homepage/evene1/الفتي الريفي/${i}.jpg`),
+    2: {
+      "2022": Array.from({length: 22}, (_, i) => `assets/images/homepage/2022/${i}.jpg`),
+      "2023": Array.from({length: 57}, (_, i) => `assets/images/homepage/2023/1 (${i + 1}).jpg`),
+      "2024": Array.from({length: 75}, (_, i) => `assets/images/homepage/2024/${i + 4}.jpg`),
+    },
+    3: {
+      "Tunisie": Array.from({ length: 25 }, (_, i) => `assets/images/homepage/evene3/tunisie/نشاط تونس/${i + 1}.jpg`),
+      "Djibouti": Array.from({ length: 14 }, (_, i) => `assets/images/homepage/evene3/djibouti/creative africa djibouti/${i + 1}.jpg`),
+      "Guinée": Array.from({ length: 19 }, (_, i) => `assets/images/homepage/evene3/guinée/${i}.jpg`),
+      "Côte d'Ivoire": Array.from({ length: 70 }, (_, i) => `assets/images/homepage/evene3/coté/1 (${i + 1}).jpg`)
+    },
+    4: Array.from({length: 38}, (_, i) => `assets/images/homepage/evene4/ee/${i}.jpg`),
+    5: 'assets/videos/event5.mp4'
+  };
+
+  function openModal(id) {
+    const modal = document.getElementById('modal');
+    const content = document.getElementById('modal-content');
+    content.innerHTML = '';
+
+    if (id === 1 || id === 4) {
+      const gallery = document.createElement('div');
+      gallery.className = 'horizontal-gallery';
+      images[id].forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Photo événement ${id}`;
+        gallery.appendChild(img);
+      });
+      content.appendChild(gallery);
+    }
+    else if (id === 2 && images[2]) {
+      const yearsData = images[2];
+      const yearsContainer = document.createElement('div');
+      yearsContainer.className = 'years-container';
+
+      for (const [year, yearImages] of Object.entries(yearsData)) {
+        const yearColumn = document.createElement('div');
+        yearColumn.className = 'year-column';
+        const yearTitle = document.createElement('h4');
+        yearTitle.textContent = `Année ${year}`;
+        const yearGallery = document.createElement('div');
+        yearGallery.className = 'year-gallery';
+        yearImages.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `Photo ${year}`;
+          yearGallery.appendChild(img);
+        });
+        yearColumn.appendChild(yearTitle);
+        yearColumn.appendChild(yearGallery);
+        yearsContainer.appendChild(yearColumn);
+      }
+      content.appendChild(yearsContainer);
+    }
+    else if (id === 3 && images[3]) {
+      const eventData = images[3];
+      for (const [country, countryImages] of Object.entries(eventData)) {
+        const countrySection = document.createElement('div');
+        countrySection.className = 'country-section';
+        const countryTitle = document.createElement('h4');
+        countryTitle.textContent = country;
+        const countryGallery = document.createElement('div');
+        countryGallery.className = 'country-gallery';
+        countryImages.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = `Photo ${country}`;
+          countryGallery.appendChild(img);
+        });
+        countrySection.appendChild(countryTitle);
+        countrySection.appendChild(countryGallery);
+        content.appendChild(countrySection);
+      }
+    }
+  else if (id === 5) {
+  const fbLink = "https://www.facebook.com/share/v/14HqptRit9X/";
+
+  const link = document.createElement('a');
+  link.href = fbLink;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Voir la vidéo sur Facebook";
+  link.style.display = "inline-block";
+  link.style.padding = "1rem 2rem";
+link.style.background = "linear-gradient(135deg, #b71c1c, #880e4f)";
+  link.style.color = "white";
+  link.style.borderRadius = "8px";
+  link.style.fontWeight = "bold";
+  link.style.textDecoration = "none";
+  link.style.textAlign = "center";
+  link.style.marginTop = "2rem";
+
+  content.appendChild(link);
+}
+
+    else {
+      content.innerHTML = "<p>Aucune donnée disponible pour cet événement.</p>";
+    }
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  window.onclick = e => {
+    if (e.target.id === 'modal') closeModal();
+  };
+
+  window.addEventListener('keydown', e => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
+
+</body>
+</html>
